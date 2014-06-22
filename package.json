@@ -1,0 +1,34 @@
+{
+  "name": "scraper-afp-foi",
+  "version": "0.0.0",
+  "description": "A scraper for FOI requests on afp.gov.au",
+  "main": "app.js",
+  "dependencies": {
+    "async": "^0.9.0",
+    "cheerio": "^0.17.0",
+    "moment": "^2.7.0",
+    "sequelize": "^1.7.9",
+    "request": "^2.36.0",
+    "sqlite3": "^2.1.19",
+    "semver": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/bbqsrc/scraper-afp-foi"
+  },
+  "keywords": [
+    "afp",
+    "foi",
+    "scraper"
+  ],
+  "author": "Brendan Molloy",
+  "license": "CC0",
+  "bugs": {
+    "url": "https://github.com/bbqsrc/scraper-afp-foi/issues"
+  },
+  "homepage": "https://github.com/bbqsrc/scraper-afp-foi"
+}
