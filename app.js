@@ -21,26 +21,30 @@ var cheerio = require('cheerio'),
 
 
 Request = sequelize.define("Request", {
-    disclosureRefNo: Sequelize.STRING,
+    disclosureRefNo: { type: Sequelize.STRING, unique: true },
     foiRequestRefNo: Sequelize.STRING,
     publishedDate: Sequelize.DATE,
     description: Sequelize.TEXT,
     docURL: Sequelize.STRING,
     removalDate: Sequelize.DATE,
     otherInfo: Sequelize.TEXT
+}, {
+    tableName: "data" // Morph.io support!
 });
 
 
 Resource = sequelize.define("Resource", {
-    fileName: Sequelize.STRING,
+    fileName: { type: Sequelize.STRING, unique: true },
     data: Sequelize.BLOB,
     url: Sequelize.STRING,
     contentType: Sequelize.STRING
+}, {
+    tableName: "resources"
 });
 
 
 Request.hasMany(Resource);
-Resource.belongsTo(Request);
+Resource.hasOne(Request, { as: "Request" });
 
 
 function parseCells($, nodes) {
@@ -73,7 +77,8 @@ function createRequestRecord(data, callback) {
                         fn += ".pdf";
                     }
                 }
-                
+               
+                // XXX: This should use streams or it's gonna be bad.
                 Resource.create({
                     fileName: fn,
                     data: body,
